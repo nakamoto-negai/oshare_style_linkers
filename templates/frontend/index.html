@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>おしゃれスタイル回答</title>
+    <meta name="description" content="あなたのスタイルに関する質問に答えるWebアプリケーション" />
+    <meta name="author" content="Oshare Style Team" />
+
+    <meta property="og:title" content="おしゃれスタイル回答" />
+    <meta property="og:description" content="あなたのスタイルに関する質問に答えるWebアプリケーション" />
+    <meta property="og:type" content="website" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- 開発環境用のVite設定 -->
+    {% if debug %}
+    <script type="module" src="http://localhost:8080/@vite/client"></script>
+    <script type="module" src="http://localhost:8080/src/main.tsx"></script>
+    {% else %}
+    <!-- プロダクション用の静的ファイル -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/index.css' %}">
+    {% endif %}
+  </head>
+
+  <body>
+    <div id="root"></div>
+    
+    {% if not debug %}
+    <!-- プロダクション用のJavaScript -->
+    {% load static %}
+    <script type="module" src="{% static 'assets/index.js' %}"></script>
+    {% endif %}
+  </body>
+</html>
