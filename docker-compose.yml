@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: .
+    container_name: django-backend
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend
+    container_name: vite-frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: oshare_db
+      POSTGRES_USER: oshare_user
+      POSTGRES_PASSWORD: oshare_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
